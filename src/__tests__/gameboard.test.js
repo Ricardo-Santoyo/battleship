@@ -1,7 +1,11 @@
 import Gameboard from '../factory functions/gameboard';
 
 test('board has the correct number of cells', () => {
-  expect(Gameboard().board).toEqual(new Array(100));
+  let array = new Array(100);
+  for (let i = 0; i < 100; i++) {
+    array[i] = '';
+  };
+  expect(Gameboard().board).toEqual(array);
 });
 
 test('places ship on board correctly(1)', () => {

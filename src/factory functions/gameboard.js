@@ -2,6 +2,9 @@ import Ship from './ship';
 
 function Gameboard() {
   let board = new Array(100);
+  for (let i = 0; i < 100; i++) {
+    board[i] = '';
+  };
   let ships = [Ship(2,[]),Ship(3,[]),Ship(3,[]),Ship(4,[]),Ship(5,[])]
   let misses = [];
 
