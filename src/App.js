@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
 import './App.css';
 import Player from "./factory functions/player";
-import AI from "./factory functions/computerAI";
 import Board from "./components/Board";
+const player1 = Player('player1');
 
 function App() {
-  const [players] = useState({1: Player('Player1'), 2: AI()});
+  const [board, setBoard] = useState(player1.gameboard.board);
+
+  function updateCell(id) {
+    player1.gameboard.receiveAttack(id);
+    setBoard([...player1.gameboard.board]);
+  };
 
   return (
     <div className="App">
-      <Board board={players[1].gameboard.board} />
+      <Board board={board} updateCell={updateCell}/>
     </div>
   );
 }

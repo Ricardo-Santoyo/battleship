@@ -12,6 +12,7 @@ body {
 .board {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
   grid-gap: 2px;
   max-width: 500px;
   height: 500px;
@@ -22,4 +23,11 @@ body {
 
 .board span {
   background-color: #000527;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board span:hover {
+  cursor: pointer;
 }
