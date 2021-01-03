@@ -37,3 +37,7 @@ body {
 .board span:hover {
   cursor: pointer;
 }
+
+.hit {
+  color: red;
+}
