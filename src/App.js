@@ -7,12 +7,17 @@ const player1 = Player('player1');
 const COM = AI();
 
 function App() {
-  const [board] = useState(player1.gameboard.board);
+  const [board, setBoard] = useState(player1.gameboard.board);
   const [enemyBoard, setEnemyBoard] = useState(COM.gameboard.board);
 
-  function updateCell(id) {
-    player1.fire(id, COM.gameboard);
-    setEnemyBoard([...COM.gameboard.board]);
+  function updateCell(id, isComputer) {
+    if (isComputer === true) {
+      COM.fire(player1.gameboard);
+      setBoard([...player1.gameboard.board]);
+    } else {
+      player1.fire(id, COM.gameboard);
+      setEnemyBoard([...COM.gameboard.board]);
+    }
   };
 
   return (
