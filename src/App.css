@@ -14,6 +14,28 @@ body {
   justify-content: space-evenly;
 }
 
+#initializeGame {
+  position: absolute;
+  top: 10%;
+  display: flex;
+  flex-direction: column;
+}
+
+#initializeGame h1 {
+  font-size: 45px;
+  text-align: center;
+}
+
+#initializeGame input {
+  border: 0;
+  padding: 15px;
+  outline: none;
+  font-size: 22px;
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
 .board {
   flex: 1;
   display: grid;
@@ -71,7 +93,8 @@ body {
   text-align: center;
 }
 
-#gameOverCard button {
+#gameOverCard button,
+#initializeGame button {
   background-color: #e7e7de;
   border: 0;
   color: #222831;
@@ -81,6 +104,23 @@ body {
   font-weight: bold;
   outline: none;
   margin-bottom: 20px;
+}
+
+#gameOverCard button {
+  transition: background-color .15s;
+}
+
+#initializeGame button {
+  background-color: white;
+  background-size: 200% 100%;
+  transition: background-position .8s;
+  background-image: linear-gradient(90deg, #fff 50%, #16c79a 50%);
+  margin-bottom: 0;
+}
+
+#initializeGame button:hover {
+  cursor: pointer;
+  background-position: -100% 0;
 }
 
 #gameOverCard button:hover {

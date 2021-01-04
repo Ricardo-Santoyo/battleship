@@ -7,9 +7,16 @@ function InitializeGame(props) {
     setValue(e.target.value);
   };
 
+  function keyPress(e) {
+    if (e.keyCode === 13) {
+      props.startGame(value);
+    }
+  };
+
   return (
     <div id='initializeGame'>
-      <input type='text' placeholder='Your Name' value={value} onChange={handleChange}></input>
+      <h1>BATTLESHIP</h1>
+      <input type='text' placeholder='Your Name' value={value} onChange={handleChange} onKeyDown={keyPress}></input>
       <button onClick={() => props.startGame(value)}>Start Game</button>
     </div>
   );
