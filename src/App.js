@@ -5,13 +5,13 @@ import AI from "./factory functions/computerAI";
 import Board from "./components/Board";
 import GameOverCard from "./components/GameOverCard";
 
-const player1 = Player('player1');
+let player1 = Player('player1');
 player1.gameboard.placeShip(0, 'y', player1.gameboard.ships[0]);
 player1.gameboard.placeShip(1, 'y', player1.gameboard.ships[1]);
 player1.gameboard.placeShip(2, 'y', player1.gameboard.ships[2]);
 player1.gameboard.placeShip(3, 'y', player1.gameboard.ships[3]);
 player1.gameboard.placeShip(4, 'y', player1.gameboard.ships[4]);
-const COM = AI();
+let COM = AI();
 COM.gameboard.placeShip(85, 'y', COM.gameboard.ships[0]);
 COM.gameboard.placeShip(76, 'y', COM.gameboard.ships[1]);
 COM.gameboard.placeShip(77, 'y', COM.gameboard.ships[2]);
@@ -47,8 +47,26 @@ function App() {
 
   function renderGameOverCard() {
     if (gameOver) {
-      return <GameOverCard winner={winner} />
+      return <GameOverCard winner={winner} startOver={startOver}/>
     }
+  };
+
+  function startOver() {
+    player1 = Player(player1.name);
+    player1.gameboard.placeShip(0, 'y', player1.gameboard.ships[0]);
+    player1.gameboard.placeShip(1, 'y', player1.gameboard.ships[1]);
+    player1.gameboard.placeShip(2, 'y', player1.gameboard.ships[2]);
+    player1.gameboard.placeShip(3, 'y', player1.gameboard.ships[3]);
+    player1.gameboard.placeShip(4, 'y', player1.gameboard.ships[4]);
+    COM = AI();
+    COM.gameboard.placeShip(85, 'y', COM.gameboard.ships[0]);
+    COM.gameboard.placeShip(76, 'y', COM.gameboard.ships[1]);
+    COM.gameboard.placeShip(77, 'y', COM.gameboard.ships[2]);
+    COM.gameboard.placeShip(68, 'y', COM.gameboard.ships[3]);
+    COM.gameboard.placeShip(59, 'y', COM.gameboard.ships[4]);
+    setBoard([...player1.gameboard.board]);
+    setEnemyBoard([...COM.gameboard.board]);
+    setGameOver(false);
   };
 
   return (

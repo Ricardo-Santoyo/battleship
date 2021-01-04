@@ -5,7 +5,7 @@ function GameOverCard(props) {
     <div id='gameOverContainer'>
       <div id='gameOverCard'>
         <h1>{props.winner} Wins!</h1>
-        <button>Play Again?</button>
+        <button onClick={() => props.startOver()}>Play Again?</button>
       </div>
     </div>
   );
