@@ -3,7 +3,7 @@ import React from 'react';
 function Board(props) {
   function boardType() {
     if (props.isEnemy === true) {
-      return props.board.map((cell, id) => cellType(cell, id, () => {props.updateCell(id); props.updateCell(null, true);}));
+      return props.board.map((cell, id) => cellType(cell, id, () => props.updateCell(id)));
     } else {
       return props.board.map((cell, id) => cellType(cell, id));
     }

@@ -3,6 +3,8 @@ import './App.css';
 import Player from "./factory functions/player";
 import AI from "./factory functions/computerAI";
 import Board from "./components/Board";
+import GameOverCard from "./components/GameOverCard";
+
 const player1 = Player('player1');
 player1.gameboard.placeShip(0, 'y', player1.gameboard.ships[0]);
 player1.gameboard.placeShip(1, 'y', player1.gameboard.ships[1]);
@@ -15,18 +17,37 @@ COM.gameboard.placeShip(76, 'y', COM.gameboard.ships[1]);
 COM.gameboard.placeShip(77, 'y', COM.gameboard.ships[2]);
 COM.gameboard.placeShip(68, 'y', COM.gameboard.ships[3]);
 COM.gameboard.placeShip(59, 'y', COM.gameboard.ships[4]);
+let winner;
 
 function App() {
   const [board, setBoard] = useState(player1.gameboard.board);
   const [enemyBoard, setEnemyBoard] = useState(COM.gameboard.board);
+  const [gameOver, setGameOver] = useState(false);
 
   function updateCell(id, isComputer) {
     if (isComputer === true) {
       COM.fire(player1.gameboard);
       setBoard([...player1.gameboard.board]);
+      gameLoop();
     } else {
       player1.fire(id, COM.gameboard);
       setEnemyBoard([...COM.gameboard.board]);
+      gameLoop(true);
+    }
+  };
+
+  function gameLoop(isComputerTurn) {
+    if (player1.gameboard.areAllSunk() || COM.gameboard.areAllSunk()) {
+      winner = (COM.gameboard.areAllSunk()) ? player1.name : COM.name;
+      setGameOver(true);
+    } else if (isComputerTurn) {
+      updateCell(null, true);
+    }
+  };
+
+  function renderGameOverCard() {
+    if (gameOver) {
+      return <GameOverCard winner={winner} />
     }
   };
 
@@ -34,6 +55,7 @@ function App() {
     <div className="App">
       <Board board={board} updateCell={updateCell} isEnemy={false}/>
       <Board board={enemyBoard} updateCell={updateCell} isEnemy={true}/>
+      {renderGameOverCard()}
     </div>
   );
 }
