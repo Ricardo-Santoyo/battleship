@@ -6,18 +6,20 @@ import InitializeGame from "./components/InitializeGame";
 import Board from "./components/Board";
 import GameOverCard from "./components/GameOverCard";
 
-let player1 = Player('player1');
-player1.gameboard.placeShip(0, 'y', player1.gameboard.ships[0]);
-player1.gameboard.placeShip(1, 'y', player1.gameboard.ships[1]);
-player1.gameboard.placeShip(2, 'y', player1.gameboard.ships[2]);
-player1.gameboard.placeShip(3, 'y', player1.gameboard.ships[3]);
-player1.gameboard.placeShip(4, 'y', player1.gameboard.ships[4]);
+let player1;
 let COM = AI();
-COM.gameboard.placeShip(85, 'y', COM.gameboard.ships[0]);
-COM.gameboard.placeShip(76, 'y', COM.gameboard.ships[1]);
-COM.gameboard.placeShip(77, 'y', COM.gameboard.ships[2]);
-COM.gameboard.placeShip(68, 'y', COM.gameboard.ships[3]);
-COM.gameboard.placeShip(59, 'y', COM.gameboard.ships[4]);
+function placeShips() {
+  player1.gameboard.placeShip(0, 'y', player1.gameboard.ships[0]);
+  player1.gameboard.placeShip(1, 'y', player1.gameboard.ships[1]);
+  player1.gameboard.placeShip(2, 'y', player1.gameboard.ships[2]);
+  player1.gameboard.placeShip(3, 'y', player1.gameboard.ships[3]);
+  player1.gameboard.placeShip(4, 'y', player1.gameboard.ships[4]);
+  COM.gameboard.placeShip(85, 'y', COM.gameboard.ships[0]);
+  COM.gameboard.placeShip(76, 'y', COM.gameboard.ships[1]);
+  COM.gameboard.placeShip(77, 'y', COM.gameboard.ships[2]);
+  COM.gameboard.placeShip(68, 'y', COM.gameboard.ships[3]);
+  COM.gameboard.placeShip(59, 'y', COM.gameboard.ships[4]);
+}
 let winner;
 
 function App() {
@@ -25,7 +27,9 @@ function App() {
   const [enemyBoard, setEnemyBoard] = useState(false);
   const [gameOver, setGameOver] = useState(false);
 
-  function startGame() {
+  function startGame(name) {
+    player1 = Player(name);
+    placeShips();
     setBoard(player1.gameboard.board);
     setEnemyBoard(COM.gameboard.board);
   };
@@ -53,17 +57,8 @@ function App() {
 
   function startOver() {
     player1 = Player(player1.name);
-    player1.gameboard.placeShip(0, 'y', player1.gameboard.ships[0]);
-    player1.gameboard.placeShip(1, 'y', player1.gameboard.ships[1]);
-    player1.gameboard.placeShip(2, 'y', player1.gameboard.ships[2]);
-    player1.gameboard.placeShip(3, 'y', player1.gameboard.ships[3]);
-    player1.gameboard.placeShip(4, 'y', player1.gameboard.ships[4]);
     COM = AI();
-    COM.gameboard.placeShip(85, 'y', COM.gameboard.ships[0]);
-    COM.gameboard.placeShip(76, 'y', COM.gameboard.ships[1]);
-    COM.gameboard.placeShip(77, 'y', COM.gameboard.ships[2]);
-    COM.gameboard.placeShip(68, 'y', COM.gameboard.ships[3]);
-    COM.gameboard.placeShip(59, 'y', COM.gameboard.ships[4]);
+    placeShips();
     setBoard([...player1.gameboard.board]);
     setEnemyBoard([...COM.gameboard.board]);
     setGameOver(false);
