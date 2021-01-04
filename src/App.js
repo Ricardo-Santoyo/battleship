@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Player from "./factory functions/player";
 import AI from "./factory functions/computerAI";
+import InitializeGame from "./components/InitializeGame";
 import Board from "./components/Board";
 import GameOverCard from "./components/GameOverCard";
 
@@ -20,9 +21,14 @@ COM.gameboard.placeShip(59, 'y', COM.gameboard.ships[4]);
 let winner;
 
 function App() {
-  const [board, setBoard] = useState(player1.gameboard.board);
-  const [enemyBoard, setEnemyBoard] = useState(COM.gameboard.board);
+  const [board, setBoard] = useState(false);
+  const [enemyBoard, setEnemyBoard] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+
+  function startGame() {
+    setBoard(player1.gameboard.board);
+    setEnemyBoard(COM.gameboard.board);
+  };
 
   function updateCell(id, isComputer) {
     if (isComputer === true) {
@@ -42,12 +48,6 @@ function App() {
       setGameOver(true);
     } else if (isComputerTurn) {
       updateCell(null, true);
-    }
-  };
-
-  function renderGameOverCard() {
-    if (gameOver) {
-      return <GameOverCard winner={winner} startOver={startOver}/>
     }
   };
 
@@ -71,9 +71,10 @@ function App() {
 
   return (
     <div className="App">
-      <Board board={board} updateCell={updateCell} isEnemy={false}/>
-      <Board board={enemyBoard} updateCell={updateCell} isEnemy={true}/>
-      {renderGameOverCard()}
+      {board === false ? <InitializeGame startGame={startGame}/> : null}
+      {board !== false ? <Board board={board} updateCell={updateCell} isEnemy={false}/> : null}
+      {enemyBoard !== false ? <Board board={enemyBoard} updateCell={updateCell} isEnemy={true}/> : null}
+      {gameOver ? <GameOverCard winner={winner} startOver={startOver}/> : null}
     </div>
   );
 }
