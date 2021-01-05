@@ -14,10 +14,12 @@ function InitializeGame(props) {
   };
 
   return (
-    <div id='initializeGame'>
-      <h1>BATTLESHIP</h1>
-      <input type='text' placeholder='Your Name' value={value} onChange={handleChange} onKeyDown={keyPress}></input>
-      <button onClick={() => props.startGame(value)}>Start Game</button>
+    <div id='initializeGameContainer'>
+      <div id='initializeGame'>
+        <h1>BATTLESHIP</h1>
+        <input type='text' placeholder='Your Name' value={value} onChange={handleChange} onKeyDown={keyPress}></input>
+        <button onClick={() => props.startGame(value)}>Start Game</button>
+      </div>
     </div>
   );
 };

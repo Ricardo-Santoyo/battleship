@@ -9,9 +9,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.App {
+#initializeGameContainer {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
 }
 
 #initializeGame {
@@ -36,14 +36,22 @@ body {
   margin-bottom: 30px;
 }
 
+#boardsContainer {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 5%;
+}
+
 .board {
-  flex: 1;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   grid-gap: 2px;
+  margin-top: 5%;
+  width: 95vw;
   max-width: 500px;
-  height: 500px;
+  height: 95vw;
+  max-height: 500px;
   padding: 3px;
   box-sizing: border-box;
   background-color: white;
@@ -58,6 +66,7 @@ body {
 
 .board span:hover {
   cursor: pointer;
+  background-color: #010733c7;
 }
 
 .hit {
@@ -126,4 +135,11 @@ body {
 #gameOverCard button:hover {
   cursor: pointer;
   background-color: white;
+}
+
+@media (max-width: 1000px) {
+  #boardsContainer {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
 }

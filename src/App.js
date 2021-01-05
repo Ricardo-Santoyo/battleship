@@ -67,8 +67,10 @@ function App() {
   return (
     <div className="App">
       {board === false ? <InitializeGame startGame={startGame}/> : null}
-      {board !== false ? <Board board={board} updateCell={updateCell} isEnemy={false}/> : null}
-      {enemyBoard !== false ? <Board board={enemyBoard} updateCell={updateCell} isEnemy={true}/> : null}
+      <div id="boardsContainer">
+        {board !== false ? <Board board={board} updateCell={updateCell} isEnemy={false}/> : null}
+        {enemyBoard !== false ? <Board board={enemyBoard} updateCell={updateCell} isEnemy={true}/> : null}
+      </div>
       {gameOver ? <GameOverCard winner={winner} startOver={startOver}/> : null}
     </div>
   );
