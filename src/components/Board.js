@@ -16,8 +16,8 @@ function Board(props) {
       case 'hit':
         return <span className='hit' key={id}>⬤</span>;
       case 'ship':
-        let text = (isEnemyBoard) ? '' : 's';
-        return <span key={id} onClick={listener}>{text}</span>;
+        let c = (isEnemyBoard) ? null : 'ship';
+        return <span className={c} key={id} onClick={listener}></span>;
       default:
         return <span key={id} onClick={listener}></span>;
     }

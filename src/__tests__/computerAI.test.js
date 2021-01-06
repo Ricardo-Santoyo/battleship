@@ -30,3 +30,13 @@ test('AI makes a random legal move(2)', () => {
   array.push(COM2.gameboard.board[2])
   expect(array).toEqual(['hit', 'hit']);
 });
+
+test('AI places ships in a random position', () => {
+  let COM1 = AI();
+  COM1.placeShips(COM1.gameboard);
+  expect(COM1.gameboard.ships[0].boardPosition).not.toEqual([]);
+  expect(COM1.gameboard.ships[1].boardPosition).not.toEqual([]);
+  expect(COM1.gameboard.ships[2].boardPosition).not.toEqual([]);
+  expect(COM1.gameboard.ships[3].boardPosition).not.toEqual([]);
+  expect(COM1.gameboard.ships[4].boardPosition).not.toEqual([]);
+});

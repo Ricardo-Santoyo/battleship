@@ -71,6 +71,11 @@ body {
 
 .hit {
   color: red;
+  background-color: #582222 !important;
+}
+
+.ship {
+  background-color: #dddddd !important;
 }
 
 #gameOverContainer {

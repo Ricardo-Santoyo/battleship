@@ -14,11 +14,7 @@ function placeShips() {
   player1.gameboard.placeShip(2, 'y', player1.gameboard.ships[2]);
   player1.gameboard.placeShip(3, 'y', player1.gameboard.ships[3]);
   player1.gameboard.placeShip(4, 'y', player1.gameboard.ships[4]);
-  COM.gameboard.placeShip(85, 'y', COM.gameboard.ships[0]);
-  COM.gameboard.placeShip(76, 'y', COM.gameboard.ships[1]);
-  COM.gameboard.placeShip(77, 'y', COM.gameboard.ships[2]);
-  COM.gameboard.placeShip(68, 'y', COM.gameboard.ships[3]);
-  COM.gameboard.placeShip(59, 'y', COM.gameboard.ships[4]);
+  COM.placeShips(COM.gameboard);
 }
 let winner;
 
