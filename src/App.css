@@ -96,7 +96,7 @@ body {
 
 .board span:hover {
   cursor: pointer;
-  background-color: #010733c7;
+  opacity: .7;
 }
 
 .hit {
@@ -104,8 +104,24 @@ body {
   background-color: #582222 !important;
 }
 
-.ship {
-  background-color: #dddddd !important;
+.ship.\30 {
+  background-color: #ed553b;
+}
+
+.ship.\31 {
+  background-color: #f6d55c;
+}
+
+.ship.\32 {
+  background-color: #2292a4;
+}
+
+.ship.\33 {
+  background-color: #dddddd;
+}
+
+.ship.\34 {
+  background-color: #3b3;
 }
 
 #gameOverContainer {

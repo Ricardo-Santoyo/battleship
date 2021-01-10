@@ -16,11 +16,22 @@ function Board(props) {
       case 'hit':
         return <span className='hit' key={id}>⬤</span>;
       case 'ship':
-        let c = (isEnemyBoard) ? null : 'ship';
+        let c = (isEnemyBoard) ? null : shipColor(id);
         return <span className={c} key={id} onClick={listener}></span>;
       default:
         return <span key={id} onClick={listener}></span>;
     }
+  };
+
+  function shipColor(id) {
+    let value;
+    for(let i = 0; i < 5; i++) {
+      if (props.ships[i].boardPosition.includes(id)) {
+        value = `ship ${i}`;
+        break;
+      }
+    }
+    return value;
   };
 
   return (
