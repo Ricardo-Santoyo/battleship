@@ -1,4 +1,5 @@
 import Gameboard from './gameboard';
+import autoPlaceShips from './autoPlaceShips';
 
 function Player(name) {
   function fire(pos, enemyBoard) {
@@ -13,6 +14,7 @@ function Player(name) {
   return {
     name,
     gameboard: Gameboard(),
+    autoPlaceShips,
     fire
   };
 };

@@ -36,6 +36,36 @@ body {
   margin-bottom: 30px;
 }
 
+#shipPlacementTitle {
+  text-align: center;
+  font-size: 40px;
+  margin: 0;
+  margin-top: 25px;
+}
+
+#shipsContainer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.shipContainer {
+  display: grid;
+  grid-gap: 2px;
+  padding: 2px;
+  box-sizing: border-box;
+  background-color: white;
+  width: 9.5vw;
+  max-width: 50px;
+}
+
+.shipContainer span {
+  height: 9.5vw;
+  max-height: 47.59px;
+}
+
 #boardsContainer {
   display: flex;
   justify-content: space-evenly;
@@ -108,7 +138,9 @@ body {
 }
 
 #gameOverCard button,
-#initializeGame button {
+#initializeGame button,
+#autoPlaceButton,
+#startGameButton {
   background-color: #e7e7de;
   border: 0;
   color: #222831;
@@ -118,27 +150,40 @@ body {
   font-weight: bold;
   outline: none;
   margin-bottom: 20px;
+  cursor: pointer;
+}
+
+#autoPlaceButton,
+#startGameButton {
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 4px;
+  font-size: 25px;
+  width: 200px;
+  max-width: 80%;
 }
 
 #gameOverCard button {
   transition: background-color .15s;
 }
 
-#initializeGame button {
+#initializeGame button,
+#startGameButton {
   background-color: white;
   background-size: 200% 100%;
-  transition: background-position .8s;
+  transition: background-position .7s;
   background-image: linear-gradient(90deg, #fff 50%, #16c79a 50%);
   margin-bottom: 0;
 }
 
-#initializeGame button:hover {
-  cursor: pointer;
+#initializeGame button:hover,
+#startGameButton:hover {
   background-position: -100% 0;
 }
 
 #gameOverCard button:hover {
-  cursor: pointer;
   background-color: white;
 }
 
