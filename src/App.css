@@ -104,6 +104,13 @@ body {
   background-color: #582222 !important;
 }
 
+.sunk {
+  transition: background-color .2s;
+  transition: color .2s;
+  background-color: #000371 !important;
+  color: #0088ff;
+}
+
 .ship.\30 {
   background-color: #ed553b;
 }

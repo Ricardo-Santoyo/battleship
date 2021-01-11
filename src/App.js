@@ -7,8 +7,9 @@ import Board from "./components/Board";
 import GameOverCard from "./components/GameOverCard";
 
 let player1;
-let ships;
+let p1Ships;
 let COM;
+let p2Ships;
 let winner;
 
 function App() {
@@ -25,13 +26,14 @@ function App() {
   function autoPlace() {
     resetPlayer();
     player1.autoPlaceShips(player1.gameboard);
-    ships = player1.gameboard.ships;
+    p1Ships = player1.gameboard.ships;
     setBoard([...player1.gameboard.board]);
   };
 
   function startGame() {
     COM = AI();
     COM.autoPlaceShips(COM.gameboard);
+    p2Ships = COM.gameboard.ships;
     setEnemyBoard([...COM.gameboard.board]);
   };
 
@@ -72,8 +74,8 @@ function App() {
       {board === false ? <InitializeGame initializePlayer={initializePlayer}/> : null}
       {board !== false && enemyBoard === false ? <h1 id='shipPlacementTitle'>Place Your Ships</h1> : null}
       <div id="boardsContainer">
-        {board !== false ? <Board board={board} isEnemy={false} ships={ships}/> : null}
-        {enemyBoard !== false ? <Board board={enemyBoard} updateCell={updateCell} isEnemy={true}/> : null}
+        {board !== false ? <Board board={board} isEnemy={false} ships={p1Ships}/> : null}
+        {enemyBoard !== false ? <Board board={enemyBoard} updateCell={updateCell} isEnemy={true} ships={p2Ships}/> : null}
       </div>
       {board !== false && enemyBoard === false ? <button id='autoPlaceButton' onClick={() => {autoPlace(); setDisplayStartButton(true)}}>Auto Place</button> : null}
       {displayStartButton === true ? <button id='startGameButton' onClick={() => {startGame(); setDisplayStartButton(false)}}>Start Game</button> : null}
