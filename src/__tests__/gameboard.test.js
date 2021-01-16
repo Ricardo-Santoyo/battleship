@@ -36,6 +36,28 @@ test('places ship on board correctly(4)', () => {
   expect(array).toEqual(['ship', 'ship', 'ship', 'ship']);
 });
 
+test('prevents placing ships on top of eachother(1)', () => {
+  let board = Gameboard();
+  board.placeShip(11, 'x', board.ships[3]);
+  expect(board.placeShip(10, 'x', board.ships[4])).toBe(false);
+});
+
+test('prevents placing ships on top of eachother(2)', () => {
+  let board = Gameboard();
+  board.placeShip(25, 'y', board.ships[1]);
+  expect(board.placeShip(45, 'y', board.ships[4])).toBe(false);
+});
+
+test('prevents ship from being placed outside the board(1)', () => {
+  let board = Gameboard();
+  expect(board.placeShip(86, 'x', board.ships[4])).toBe(false);
+});
+
+test('prevents ship from being placed outside the board(2)', () => {
+  let board = Gameboard();
+  expect(board.placeShip(91, 'y', board.ships[0])).toBe(false);
+});
+
 test('passes board position to ship(1)', () => {
   let board = Gameboard();
   board.placeShip(3, 'y', board.ships[4]);

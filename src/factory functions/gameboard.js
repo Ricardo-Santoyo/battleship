@@ -9,17 +9,28 @@ function Gameboard() {
   let misses = [];
 
   function placeShip(pos, axis, ship) {
-    if (axis === 'y') {
-      for(let i = 0; i < (ship.length * 10); i += 10) {
+    let n = axis === 'y' ? 10 : 1;
+    if (checkShipPlacementValidity(pos, ship.length, n)) {
+      for(let i = 0; i < (ship.length * n); i += n) {
         board[pos + i] = 'ship';
         ship.boardPosition.push(pos + i);
       }
+      return true;
     } else {
-      for(let i = 0; i < ship.length; i++) {
-        board[pos + i] = 'ship';
-        ship.boardPosition.push(pos + i);
+      return false;
+    }
+  };
+
+  function checkShipPlacementValidity(pos, shipLength, n) {
+    let vaild = true;
+    for(let i = 0; i < (shipLength * n); i += n) {
+      if (board[pos + i] === 'ship') {
+        vaild = false;
+      } else if ((n === 1 && pos % 10 + i > 9) || (n === 10 && pos + (shipLength * 10 - 10) > 99)) {
+        vaild = false;
       }
     }
+    return vaild;
   };
 
   function receiveAttack(pos) {

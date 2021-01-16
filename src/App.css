@@ -43,12 +43,33 @@ body {
   margin-top: 25px;
 }
 
+#shipsWrapper {
+  margin: 0 auto;
+  max-width: 500px;
+  border: 3px solid white;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+}
+
+#rotateButton {
+  width: 100%;
+  border: 0;
+  padding: 10px 0;
+  border-radius: 7px 7px 0 0;
+  background-color: white;
+  font-size: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+}
+
 #shipsContainer {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-around;
-  max-width: 500px;
-  margin: 0 auto;
+  padding: 20px;
 }
 
 .shipContainer {
@@ -57,13 +78,32 @@ body {
   padding: 2px;
   box-sizing: border-box;
   background-color: white;
-  width: 9.5vw;
-  max-width: 50px;
+}
+
+.shipContainer.x {
+  margin-bottom: 20px;
+}
+
+.shipContainer.x.\32 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.shipContainer.x.\33 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.shipContainer.x.\34 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.shipContainer.x.\35 {
+  grid-template-columns: repeat(5, 1fr);
 }
 
 .shipContainer span {
   height: 9.5vw;
   max-height: 47.59px;
+  width: 9.5vw;
+  max-width: 46px;
 }
 
 #boardsContainer {
@@ -198,7 +238,7 @@ body {
   background-size: 200% 100%;
   transition: background-position .7s;
   background-image: linear-gradient(90deg, #fff 50%, #16c79a 50%);
-  margin-bottom: 0;
+  margin-bottom: 50px;
 }
 
 #initializeGame button:hover,
