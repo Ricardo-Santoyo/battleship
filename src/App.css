@@ -36,16 +36,24 @@ body {
   margin-bottom: 30px;
 }
 
-#shipPlacementTitle {
+#gameText h1 {
   text-align: center;
-  font-size: 40px;
   margin: 0;
+  font-size: 40px;
   margin-top: 25px;
 }
 
+#gameText p {
+  text-align: center;
+  margin: 0;
+  margin-top: 10px;
+}
+
 #shipsWrapper {
-  margin: 0 auto;
-  max-width: 500px;
+  order: 2;
+  margin-top: 5%;
+  width: 95%;
+  max-width: 400px;
   border: 3px solid white;
   border-radius: 15px;
   margin-bottom: 20px;
@@ -100,15 +108,16 @@ body {
 }
 
 .shipContainer span {
-  height: 9.5vw;
+  height: 9vw;
   max-height: 47.59px;
-  width: 9.5vw;
+  width: 9vw;
   max-width: 46px;
 }
 
 #boardsContainer {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   margin-bottom: 5%;
 }
 
@@ -117,6 +126,7 @@ body {
   grid-template-columns: repeat(10, 1fr);
   grid-template-rows: repeat(10, 1fr);
   grid-gap: 2px;
+  order: 1;
   margin-top: 5%;
   width: 95vw;
   max-width: 500px;
@@ -254,5 +264,9 @@ body {
   #boardsContainer {
     flex-direction: column-reverse;
     align-items: center;
+  }
+
+  #shipsWrapper {
+    order: 0;
   }
 }

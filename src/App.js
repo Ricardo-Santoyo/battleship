@@ -5,6 +5,7 @@ import './App.css';
 import Player from "./factory functions/player";
 import AI from "./factory functions/computerAI";
 import InitializeGame from "./components/InitializeGame";
+import GameText from "./components/GameText";
 import Board from "./components/Board";
 import GameOverCard from "./components/GameOverCard";
 import Ships from "./components/Ships";
@@ -103,14 +104,14 @@ function App() {
   return (
     <div className="App">
       {board === false ? <InitializeGame initializePlayer={initializePlayer}/> : null}
-      {board !== false && enemyBoard === false ? <h1 id='shipPlacementTitle'>Place Your Ships</h1> : null}
+      {board !== false && enemyBoard === false ? <GameText /> : null}
       <DndProvider options={HTML5toTouch}>
         <div id="boardsContainer">
           {board !== false ? <Board board={board} axis={axis} placeShip={allShipsPlaced ? null : placeShip} isEnemy={false} ships={p1Ships}/> : null}
           {enemyBoard !== false ? <Board board={enemyBoard} updateCell={updateCell} isEnemy={true} ships={p2Ships}/> : null}
+          {board !== false && allShipsPlaced === false ? <Ships axis={axis} changeAxis={changeAxis}/> : null}
+          <ShipPreview axis={axis}/>
         </div>
-        {board !== false && allShipsPlaced === false ? <Ships axis={axis} changeAxis={changeAxis}/> : null}
-        <ShipPreview axis={axis}/>
       </DndProvider>
       {board !== false && enemyBoard === false ? <button id='autoPlaceButton' onClick={() => {autoPlace(); setDisplayStartButton(true)}}>Auto Place</button> : null}
       {displayStartButton === true ? <button id='startGameButton' onClick={() => {startGame(); setDisplayStartButton(false)}}>Start Game</button> : null}
