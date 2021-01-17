@@ -58,6 +58,30 @@ test('prevents ship from being placed outside the board(2)', () => {
   expect(board.placeShip(91, 'y', board.ships[0])).toBe(false);
 });
 
+test('prevents ship from being placed outside the board(3)', () => {
+  let board = Gameboard();
+  expect(board.placeShip(-1, 'x', board.ships[0])).toBe(false);
+});
+
+test('prevents ship from being placed outside the board(4)', () => {
+  let board = Gameboard();
+  expect(board.placeShip(-10, 'y', board.ships[4])).toBe(false);
+});
+
+test('prevents a ship from being placed more than once(1)', () => {
+  let board = Gameboard();
+  board.placeShip(0, 'y', board.ships[4])
+  expect(board.placeShip(31, 'x', board.ships[4])).toBe(false);
+});
+
+test('prevents a ship from being placed more than once(2)', () => {
+  let board = Gameboard();
+  board.placeShip(10, 'y', board.ships[0])
+  board.placeShip(31, 'x', board.ships[1])
+  board.placeShip(95, 'x', board.ships[3])
+  expect(board.placeShip(49, 'y', board.ships[3])).toBe(false);
+});
+
 test('passes board position to ship(1)', () => {
   let board = Gameboard();
   board.placeShip(3, 'y', board.ships[4]);
