@@ -5,7 +5,7 @@ function CreateShip(props) {
   const [pos, setPos] = useState(0);
 
   const [, drag] = useDrag({
-    item: { type: 'ship', id:props.id, pos:pos },
+    item: { type: 'ship', length:props.length, id:props.id, pos:pos },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging()
     })
@@ -20,7 +20,11 @@ function CreateShip(props) {
   };
 
   return (
-    <div className={`shipContainer ${props.axis} ${props.length}`} ref={drag} onMouseDown={(e) => setPos(e.target.getAttribute('data-key'))}>
+    <div 
+    className={`shipContainer ${props.axis} ${props.length}`} 
+    ref={drag} 
+    onMouseDown={(e) => setPos(e.target.getAttribute('data-key'))}
+    onTouchStart={(e) => setPos(e.target.getAttribute('data-key'))}>
       {createShip()}
     </div>
   );

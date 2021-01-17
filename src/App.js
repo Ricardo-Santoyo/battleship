@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import { DndProvider } from 'react-dnd-multi-backend';
+import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch';
 import './App.css';
 import Player from "./factory functions/player";
 import AI from "./factory functions/computerAI";
@@ -8,6 +8,7 @@ import InitializeGame from "./components/InitializeGame";
 import Board from "./components/Board";
 import GameOverCard from "./components/GameOverCard";
 import Ships from "./components/Ships";
+import ShipPreview from "./components/ShipPreview";
 
 let player1;
 let shipNumber = 0;
@@ -103,12 +104,13 @@ function App() {
     <div className="App">
       {board === false ? <InitializeGame initializePlayer={initializePlayer}/> : null}
       {board !== false && enemyBoard === false ? <h1 id='shipPlacementTitle'>Place Your Ships</h1> : null}
-      <DndProvider backend={HTML5Backend}>
+      <DndProvider options={HTML5toTouch}>
         <div id="boardsContainer">
           {board !== false ? <Board board={board} axis={axis} placeShip={allShipsPlaced ? null : placeShip} isEnemy={false} ships={p1Ships}/> : null}
           {enemyBoard !== false ? <Board board={enemyBoard} updateCell={updateCell} isEnemy={true} ships={p2Ships}/> : null}
         </div>
         {board !== false && allShipsPlaced === false ? <Ships axis={axis} changeAxis={changeAxis}/> : null}
+        <ShipPreview axis={axis}/>
       </DndProvider>
       {board !== false && enemyBoard === false ? <button id='autoPlaceButton' onClick={() => {autoPlace(); setDisplayStartButton(true)}}>Auto Place</button> : null}
       {displayStartButton === true ? <button id='startGameButton' onClick={() => {startGame(); setDisplayStartButton(false)}}>Start Game</button> : null}
