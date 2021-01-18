@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 function InitializeGame(props) {
   const [value, setValue] = useState('');
+  const [invaildForm, setInvaildForm] = useState(false);
   
   function handleChange(e) {
     setValue(e.target.value);
@@ -13,12 +14,21 @@ function InitializeGame(props) {
     }
   };
 
+  function validateForm() {
+    if (/^[a-zA-Z]/.test(value)) {
+      props.initializePlayer(value);
+    } else {
+      setInvaildForm(true);
+    }
+  }
+
   return (
     <div id='initializeGameContainer'>
       <div id='initializeGame'>
         <h1>BATTLESHIP</h1>
+        <p>{invaildForm ? 'Name Required' : ''}</p>
         <input type='text' placeholder='Your Name' value={value} onChange={handleChange} onKeyDown={keyPress}></input>
-        <button onClick={() => props.initializePlayer(value)}>Continue</button>
+        <button onClick={() => validateForm()}>Continue</button>
       </div>
     </div>
   );

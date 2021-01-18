@@ -50,13 +50,21 @@ body {
 #initializeGame {
   position: absolute;
   top: 10%;
+  max-width: 90%;
   display: flex;
   flex-direction: column;
+  text-align: center;
 }
 
 #initializeGame h1 {
   font-size: 45px;
-  text-align: center;
+}
+
+#initializeGame p {
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 #initializeGame input {
@@ -297,6 +305,10 @@ body {
 }
 
 @media (max-width: 300px) {
+  #initializeGame h1 {
+    font-size: 35px;
+  }
+
   .board span {
     font-size: 12px;
   }
