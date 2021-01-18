@@ -9,6 +9,39 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+#animation {
+  display: block;
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  background: #111;
+  height: 100%;
+  width: 100%;
+  animation: slideIn .4s ease-out, .4s slideOut .4s ease-out;
+}
+
+@keyframes slideIn {
+  0% {
+    visibility: visible;
+    left: 100%;
+  }
+
+  25% {
+    left: 0;
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    visibility: visible;
+    left: 0;
+  }
+
+  100% {
+    left: -100%;
+  }
+}
+
 #initializeGameContainer {
   display: flex;
   justify-content: center;
@@ -245,15 +278,7 @@ body {
 #initializeGame button,
 #startGameButton {
   background-color: white;
-  background-size: 200% 100%;
-  transition: background-position .7s;
-  background-image: linear-gradient(90deg, #fff 50%, #16c79a 50%);
   margin-bottom: 50px;
-}
-
-#initializeGame button:hover,
-#startGameButton:hover {
-  background-position: -100% 0;
 }
 
 #gameOverCard button:hover {
@@ -268,5 +293,11 @@ body {
 
   #shipsWrapper {
     order: 0;
+  }
+}
+
+@media (max-width: 300px) {
+  .board span {
+    font-size: 12px;
   }
 }

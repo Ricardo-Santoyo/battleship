@@ -10,6 +10,7 @@ import Board from "./components/Board";
 import GameOverCard from "./components/GameOverCard";
 import Ships from "./components/Ships";
 import ShipPreview from "./components/ShipPreview";
+import Animation from "./components/Animation";
 
 let player1;
 let shipNumber = 0;
@@ -25,10 +26,14 @@ function App() {
   const [allShipsPlaced, setAllShipsPlaced] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [axis, setAxis] = useState('y');
+  const [playAnimation, setPlayAnimation] = useState(false);
 
   function initializePlayer(name) {
     player1 = Player(name);
-    setBoard(player1.gameboard.board);
+    setPlayAnimation(true);
+    setTimeout(() => {
+      setBoard(player1.gameboard.board);
+    }, 200);
   };
 
   function changeAxis() {
@@ -65,7 +70,10 @@ function App() {
     COM = AI();
     COM.autoPlaceShips(COM.gameboard);
     p2Ships = COM.gameboard.ships;
-    setEnemyBoard([...COM.gameboard.board]);
+    setPlayAnimation(true);
+    setTimeout(() => {
+      setEnemyBoard([...COM.gameboard.board]);
+    }, 200);
   };
 
   function updateCell(id, isComputer) {
@@ -96,9 +104,12 @@ function App() {
 
   function startOver() {
     resetPlayer();
-    setEnemyBoard(false);
-    setAllShipsPlaced(false);
-    setGameOver(false);
+    setPlayAnimation(true);
+    setTimeout(() => {
+      setEnemyBoard(false);
+      setAllShipsPlaced(false);
+      setGameOver(false);
+    }, 200);
   };
 
   return (
@@ -116,6 +127,7 @@ function App() {
       {board !== false && enemyBoard === false ? <button id='autoPlaceButton' onClick={() => {autoPlace(); setDisplayStartButton(true)}}>Auto Place</button> : null}
       {displayStartButton === true ? <button id='startGameButton' onClick={() => {startGame(); setDisplayStartButton(false)}}>Start Game</button> : null}
       {gameOver ? <GameOverCard winner={winner} startOver={startOver}/> : null}
+      {playAnimation ? <Animation setPlayAnimation={setPlayAnimation}/> : null}
     </div>
   );
 }
