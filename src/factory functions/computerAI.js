@@ -26,6 +26,7 @@ function AI() {
   function setCurrentTarget(pos) {
     currentTarget = pos;
     previousTarget = pos;
+    nextPos = undefined;
   };
 
   function pickNextTarget(enemyBoard) {
@@ -54,6 +55,11 @@ function AI() {
         } else {
           nextPos = possiblePos.find((pos) => (validPos(pos)));
         }
+      }
+
+      if (nextPos === undefined) {
+        currentTarget = undefined;
+        previousTarget = undefined;
       }
       return currentTarget + nextPos
     }

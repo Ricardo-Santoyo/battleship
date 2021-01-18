@@ -100,7 +100,6 @@ test('when the AI hits a ship, the next attack will be adjacent to the last hit(
   expect(COM1.fire(COM2.gameboard)).toBe(74);
   expect(COM1.fire(COM2.gameboard)).toBe(85);
   expect(COM1.fire(COM2.gameboard)).toBe(65);
-  COM1.fire(COM2.gameboard);
   COM2.gameboard.receiveAttack(98);
   COM1.setCurrentTarget(98);
   expect(COM1.fire(COM2.gameboard)).toBe(99);
@@ -167,4 +166,32 @@ test('when the AI hits a ship, the next attack will be adjacent to the last hit(
   expect(COM1.fire(COM2.gameboard)).toBe(21);
   expect(COM1.fire(COM2.gameboard)).toBe(11);
   expect(COM1.fire(COM2.gameboard)).toBe(1);
+});
+
+test('if the AI has no where to shoot it shoots randomly again', () => {
+  let COM1 = AI();
+  let COM2 = AI();
+  COM2.gameboard.placeShip(23, 'y', COM2.gameboard.ships[4]);
+  COM2.gameboard.placeShip(54, 'x', COM2.gameboard.ships[1]);
+  COM2.gameboard.placeShip(64, 'x', COM2.gameboard.ships[2]);
+  COM2.gameboard.placeShip(37, 'y', COM2.gameboard.ships[3]);
+  COM2.gameboard.placeShip(76, 'x', COM2.gameboard.ships[0]);
+  COM2.gameboard.receiveAttack(63);
+  COM1.setCurrentTarget(63);
+  expect(COM1.fire(COM2.gameboard)).toBe(64);
+  expect(COM1.fire(COM2.gameboard)).toBe(65);
+  expect(COM1.fire(COM2.gameboard)).toBe(66);
+  COM2.gameboard.receiveAttack(55);
+  COM1.setCurrentTarget(55);
+  expect(COM1.fire(COM2.gameboard)).toBe(56);
+  expect(COM1.fire(COM2.gameboard)).toBe(57);
+  expect(COM1.fire(COM2.gameboard)).toBe(58);
+  expect(COM1.fire(COM2.gameboard)).toBe(54);
+  COM2.gameboard.receiveAttack(76);
+  COM1.setCurrentTarget(76);
+  expect(COM1.fire(COM2.gameboard)).toBe(77);
+  COM2.gameboard.receiveAttack(67);
+  COM1.setCurrentTarget(67);
+  expect(COM1.fire(COM2.gameboard)).toBe(68);
+  expect(isNaN(COM1.fire(COM2.gameboard))).toBe(false);
 });

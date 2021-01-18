@@ -56,7 +56,7 @@ function Cell(props) {
   };
 
   return (
-    <span className={a[0]} ref={a[1]} onClick={props.listener}>{content()}</span>
+    <span className={a[0]} ref={a[1]} onClick={props.content === '' || props.content === 'ship' ? props.listener : null}>{content()}</span>
   );
 };
 
