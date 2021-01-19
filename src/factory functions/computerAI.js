@@ -5,6 +5,7 @@ function AI() {
   let currentTarget;
   let nextPos;
   let previousTarget;
+  let shipTarget;
 
   function fire(enemyBoard) {
     let pos = currentTarget ? pickNextTarget(enemyBoard) : Math.floor(Math.random() * 100);
@@ -18,15 +19,23 @@ function AI() {
       currentTarget = pos;
       if (!(previousTarget)) {
         previousTarget = pos;
+        shipTarget = findShip(pos, enemyBoard.ships);
       }
     }
     return pos;
   };
 
-  function setCurrentTarget(pos) {
+  function findShip(pos, ships) {
+    return ships.findIndex((ship) => (
+      ship.boardPosition.includes(pos)
+    ));
+  };
+
+  function setCurrentTarget(pos, ships) {
     currentTarget = pos;
     previousTarget = pos;
     nextPos = undefined;
+    shipTarget = findShip(pos, ships);
   };
 
   function pickNextTarget(enemyBoard) {
@@ -35,6 +44,8 @@ function AI() {
         if (pos === 1 && currentTarget % 10 + 1 > 9) {
           return false;
         } else if (pos === -1 && currentTarget % 10 - 1 < 0) {
+          return false;
+        } else if (enemyBoard.board[currentTarget + pos] === 'ship' && !(enemyBoard.ships[shipTarget].boardPosition.includes(currentTarget + pos))) {
           return false;
         } else {
           return true;
@@ -48,8 +59,8 @@ function AI() {
       nextPos = undefined;
     } else {
       const possiblePos = [1, -1, 10, -10];
-      if (!(enemyBoard.board[currentTarget + nextPos] !== 'miss' && enemyBoard.board[currentTarget + nextPos] !== 'hit' && currentTarget + nextPos < 100)) {
-        if (enemyBoard.board[previousTarget - nextPos] === 'ship' && nextPos) {
+      if (!(enemyBoard.board[currentTarget + nextPos] !== 'miss' && enemyBoard.board[currentTarget + nextPos] !== 'hit' && currentTarget + nextPos < 100 && enemyBoard.ships[shipTarget].boardPosition.includes(currentTarget + nextPos))) {
+        if (enemyBoard.board[previousTarget - nextPos] === 'ship' && nextPos && enemyBoard.ships[shipTarget].boardPosition.includes(previousTarget - nextPos)) {
           currentTarget = previousTarget;
           nextPos = -nextPos;
         } else {
