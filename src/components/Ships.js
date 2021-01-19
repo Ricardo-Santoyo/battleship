@@ -6,11 +6,11 @@ function Ships(props) {
     <div id='shipsWrapper'>
       <button id='rotateButton' onClick={() => props.changeAxis()}>🗘Rotate</button>
       <div id='shipsContainer'>
-        <CreateShip id='0' length='2' axis={props.axis} />
-        <CreateShip id='1' length='3' axis={props.axis} />
-        <CreateShip id='2' length='3' axis={props.axis} />
-        <CreateShip id='3' length='4' axis={props.axis} />
-        <CreateShip id='4' length='5' axis={props.axis} />
+        {props.shipNumArray.includes('0') ? null : <CreateShip id='0' length='2' axis={props.axis} />}
+        {props.shipNumArray.includes('1') ? null : <CreateShip id='1' length='3' axis={props.axis} />}
+        {props.shipNumArray.includes('2') ? null : <CreateShip id='2' length='3' axis={props.axis} />}
+        {props.shipNumArray.includes('3') ? null : <CreateShip id='3' length='4' axis={props.axis} />}
+        {props.shipNumArray.includes('4') ? null : <CreateShip id='4' length='5' axis={props.axis} />}
       </div>
     </div>
   );

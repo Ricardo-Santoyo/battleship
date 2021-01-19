@@ -13,10 +13,7 @@ import ShipPreview from "./components/ShipPreview";
 import Animation from "./components/Animation";
 
 let player1;
-let shipNumber = 0;
-let p1Ships;
 let COM;
-let p2Ships;
 let winner;
 
 function App() {
@@ -29,6 +26,7 @@ function App() {
   const [playAnimation, setPlayAnimation] = useState(false);
   const [boardOn, setBoardOn] = useState(true);
   const [gameText, setGameText] = useState(['Place Your Ships','(Drag Ship on to The Board to Place)']);
+  const [shipNumArray, setShipNumArray] = useState([]);
 
   function initializePlayer(name) {
     player1 = Player(name);
@@ -45,12 +43,11 @@ function App() {
 
   function placeShip(id, axis, ship, shipPos) {
     shipPos = axis === 'x' ? shipPos : shipPos * 10;
-    id = id - shipPos;
+    id -= shipPos;
     if (player1.gameboard.placeShip(id, axis, player1.gameboard.ships[ship])) {
-      shipNumber += 1
-      p1Ships = player1.gameboard.ships;
-      if (shipNumber === 5) {
-        shipNumber = 0;
+      setShipNumArray([...shipNumArray, ship]);
+      if (shipNumArray.length === 4) {
+        setShipNumArray([]);
         setDisplayStartButton(true);
         setAllShipsPlaced(true);
       }
@@ -59,11 +56,11 @@ function App() {
   };
 
   function autoPlace() {
-    if (shipNumber === 0) {
+    if (shipNumArray.length === 0) {
       resetPlayer();
       player1.autoPlaceShips(player1.gameboard);
-      p1Ships = player1.gameboard.ships;
       setAllShipsPlaced(true);
+      setDisplayStartButton(true)
       setBoard([...player1.gameboard.board]);
     }
   };
@@ -71,7 +68,6 @@ function App() {
   function startGame() {
     COM = AI();
     COM.autoPlaceShips(COM.gameboard);
-    p2Ships = COM.gameboard.ships;
     setPlayAnimation(true);
     setTimeout(() => {
       setGameText([`${player1.name}'s Turn`,'']);
@@ -130,13 +126,13 @@ function App() {
       {board !== false ? <GameText h1={gameText[0]} p={gameText[1]}/> : null}
       <DndProvider options={HTML5toTouch}>
         <div id="boardsContainer">
-          {board !== false ? <Board board={board} axis={axis} placeShip={allShipsPlaced ? null : placeShip} isEnemy={false} ships={p1Ships}/> : null}
-          {enemyBoard !== false ? <Board board={enemyBoard} updateCell={updateCell} isEnemy={true} ships={p2Ships} class={boardOn ? null : 'off'}/> : null}
-          {board !== false && allShipsPlaced === false ? <Ships axis={axis} changeAxis={changeAxis}/> : null}
+          {board !== false ? <Board board={board} axis={axis} placeShip={allShipsPlaced ? null : placeShip} isEnemy={false} ships={player1.gameboard.ships}/> : null}
+          {enemyBoard !== false ? <Board board={enemyBoard} updateCell={updateCell} isEnemy={true} ships={COM.gameboard.ships} class={boardOn ? null : 'off'}/> : null}
+          {board !== false && allShipsPlaced === false ? <Ships axis={axis} changeAxis={changeAxis} shipNumArray={shipNumArray}/> : null}
           <ShipPreview axis={axis}/>
         </div>
       </DndProvider>
-      {board !== false && enemyBoard === false ? <button id='autoPlaceButton' onClick={() => {autoPlace(); setDisplayStartButton(true)}}>Auto Place</button> : null}
+      {board !== false && enemyBoard === false ? <button id='autoPlaceButton' onClick={() => autoPlace()}>Auto Place</button> : null}
       {displayStartButton === true ? <button id='startGameButton' onClick={() => {startGame(); setDisplayStartButton(false)}}>Start Game</button> : null}
       {gameOver ? <GameOverCard winner={winner} startOver={startOver}/> : null}
       {playAnimation ? <Animation setPlayAnimation={setPlayAnimation}/> : null}
