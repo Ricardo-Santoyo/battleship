@@ -27,6 +27,8 @@ function App() {
   const [gameOver, setGameOver] = useState(false);
   const [axis, setAxis] = useState('y');
   const [playAnimation, setPlayAnimation] = useState(false);
+  const [boardOn, setBoardOn] = useState(true);
+  const [gameText, setGameText] = useState(['Place Your Ships','(Drag Ship on to The Board to Place)']);
 
   function initializePlayer(name) {
     player1 = Player(name);
@@ -72,6 +74,7 @@ function App() {
     p2Ships = COM.gameboard.ships;
     setPlayAnimation(true);
     setTimeout(() => {
+      setGameText([`${player1.name}'s Turn`,'']);
       setEnemyBoard([...COM.gameboard.board]);
     }, 200);
   };
@@ -91,9 +94,17 @@ function App() {
   function gameLoop(isComputerTurn) {
     if (player1.gameboard.areAllSunk() || COM.gameboard.areAllSunk()) {
       winner = (COM.gameboard.areAllSunk()) ? player1.name : COM.name;
+      setBoardOn(true);
       setGameOver(true);
     } else if (isComputerTurn) {
-      updateCell(null, true);
+      setGameText([`${COM.name}'s Turn`,'']);
+      setBoardOn(false);
+      setTimeout(() => {
+        updateCell(null, true);
+      }, 400);
+    } else {
+      setGameText([`${player1.name}'s Turn`,'']);
+      setBoardOn(true);
     }
   };
 
@@ -109,17 +120,18 @@ function App() {
       setEnemyBoard(false);
       setAllShipsPlaced(false);
       setGameOver(false);
+      setGameText(['Place Your Ships','(Drag Ship on to The Board to Place)']);
     }, 200);
   };
 
   return (
     <div className="App">
       {board === false ? <InitializeGame initializePlayer={initializePlayer}/> : null}
-      {board !== false && enemyBoard === false ? <GameText /> : null}
+      {board !== false ? <GameText h1={gameText[0]} p={gameText[1]}/> : null}
       <DndProvider options={HTML5toTouch}>
         <div id="boardsContainer">
           {board !== false ? <Board board={board} axis={axis} placeShip={allShipsPlaced ? null : placeShip} isEnemy={false} ships={p1Ships}/> : null}
-          {enemyBoard !== false ? <Board board={enemyBoard} updateCell={updateCell} isEnemy={true} ships={p2Ships}/> : null}
+          {enemyBoard !== false ? <Board board={enemyBoard} updateCell={updateCell} isEnemy={true} ships={p2Ships} class={boardOn ? null : 'off'}/> : null}
           {board !== false && allShipsPlaced === false ? <Ships axis={axis} changeAxis={changeAxis}/> : null}
           <ShipPreview axis={axis}/>
         </div>

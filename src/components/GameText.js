@@ -1,10 +1,11 @@
 import React from 'react';
 
-function GameText() {
+function GameText(props) {
+
   return (
     <div id='gameText'>
-      <h1>Place Your Ships</h1>
-      <p>(Drag Ship on to The Board to Place)</p>
+      <h1>{props.h1}</h1>
+      <p>{props.p}</p>
     </div>
   );
 };

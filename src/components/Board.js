@@ -15,7 +15,7 @@ function Board(props) {
   }
 
   return (
-    <div className='board'>
+    <div className={`board ${props.class}`}>
       {boardType()}
     </div>
   );

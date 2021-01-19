@@ -178,6 +178,11 @@ body {
   background-color: white;
 }
 
+.board.off {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
 .board span {
   background-color: #010733;
   display: flex;
@@ -304,9 +309,19 @@ body {
   }
 }
 
+@media (max-width: 500px) {
+  #gameText h1 {
+    font-size: 30px;
+  }
+}
+
 @media (max-width: 300px) {
   #initializeGame h1 {
     font-size: 35px;
+  }
+
+  #gameText h1 {
+    font-size: 20px;
   }
 
   .board span {
